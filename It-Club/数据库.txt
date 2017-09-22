@@ -1,0 +1,7 @@
+数据库的名字:
+    blog
+
+
+ 集合:
+     users(用户)集合:    username,password,avatar,sex,age,signal(个性签名)
+     contents(发表的内容)集合: username,content(内容),time(格式),click(点赞),comments(评论):[{username,time,comentContent}],

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/icon.png">
+    <title>blog</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="/javascripts/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="/javascripts/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+<% include header.ejs%>
+<div class="container"  style="float: left;display: flex;margin-top: 10px">
+    <div class="row col-lg-6">
+        <form method="post" action="/users/userinfo">
+            <div class="userAvator">
+                <h5>点击修改头像</h5>
+                <a href="/users/setavatar"><img src="<%=users[0].avatar%>"></a></div>
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input disabled type="text" name="username" class="form-control" id="username" value="<%=users[0].username%>">
+            </div>
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input disabled type="text" name="password" class="form-control" id="password" value="******">
+            </div>
+            <div class="form-group">
+                <label>性别:</label>
+                <label><input  disabled name="sex" type="radio" value="男"  <%if(users[0].sex=="男"){%>checked<%}%>/>男 </label>
+                <label><input  disabled name="sex" type="radio" value="女" <%if(users[0].sex=="女"){%>checked<%}%> style="margin-left: 24px" />女 </label>
+            </div>
+            <div class="form-group">
+                <label for="age">年龄</label>
+                <input  disabled type="text" name="age" class="form-control" id="age" value="<%=users[0].age%>">
+            </div>
+            <div class="form-group">
+                <label for="birthday">生日</label>
+                <input  disabled type="text" name="birthday" class="form-control" id="birthday" value="<%=users[0].birthday%>">
+            </div>
+            <div class="form-group">
+                <label for="occupation">职业</label>
+                <input disabled type="text" name="occupation" class="form-control" id="occupation" value="<%=users[0].occupation%>">
+            </div>
+            <div class="form-group">
+                <label for="hobby">爱好</label>
+                <input disabled type="text" name="hobby" class="form-control" id="hobby" value="<%=users[0].hobby%>">
+            </div>
+            <div class="form-group">
+                <label for="live">现居地</label>
+                <input disabled type="text" name="live" class="form-control" id="live" value="<%=users[0].live%>">
+            </div>
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input disabled type="text" name="email" class="form-control" id="email" value="<%=users[0].email%>">
+            </div>
+            <div class="form-group">
+                <label for="motto">座右铭</label>
+                <textarea id="motto" disabled name="motto" style="vertical-align: middle;width: 300px"><%=users[0].motto%></textarea>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-default" id="btn">修改个人资料</button>
+                <button type="submit" style="display: none" class="btn btn-default" id="btns">确认修改</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="position:absolute;right:50px;width: 500px;height: 500px;margin-left: 0;">
+    <h3 >所有注册用户</h3>
+    <div style="width:100%;height:100%;overflow: scroll;border: 1px solid #ccc" >
+        <%for(var i=0;i<countUsers.length;i++ ){%>
+        <div style="width:95%;border:1px solid #ccc;border-radius:3px;margin: 10px 0 20px 10px">
+            <img style="width: 50px;float: left;margin-right: 20px" src="<%=countUsers[i].avatar%>">
+            <p style="height: 50%;width: 250px"><span>注册人：<%=countUsers[i].username%></span></p>
+            <p style="height: 50%;width: 250px"><span>用户性别：<%=countUsers[i].sex%></span></p>
+            <a style="cursor: pointer" href="/users/<%=countUsers[i].username%>">点击查看用户详细资料</a>
+        </div>
+        <%}%>
+    </div>
+
+</div>
+
+</body>
+<script>
+    $(function () {
+        $('#btn').click(function () {
+          $('input').attr('disabled',false);
+          $('textarea').attr('disabled',false);
+           $('#btns').css('display','inline-block');
+            $(this).attr('disabled',true);
+        })
+
+    })
+</script>
+</html>
